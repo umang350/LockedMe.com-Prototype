@@ -17,6 +17,7 @@ public class LockedMeMain {
 		System.out.println("\t  Developed By: Umang Chauhan");
 		System.out.println("-----------------------------------------------------");
 		int ch=0;
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		AppFileService service = new AppFileServiceImpl();
 		try {
@@ -42,7 +43,7 @@ public class LockedMeMain {
 				try {
 					List<AppFile> appFilesList=service.getAllAppFiles();
 					if(appFilesList!=null && appFilesList.size()>0) {
-						System.out.println("Currently there are "+appFilesList.size()+ " files in the LockedMe.com App.\nAll Files Listed below in descending order:- ");
+						System.out.println("Currently there are "+appFilesList.size()+ " files in the LockedMe.com App.\nAll Files Listed below in ascending order:- ");
 						for(AppFile s:appFilesList) {
 							System.out.println(s.getFileName());
 						}
@@ -84,47 +85,14 @@ public class LockedMeMain {
 					}
 					break;
 				case 2:
-					do {
-						System.out.println("\nRemove File Menu");
-						System.out.println("======================");
-						System.out.println("1) Remove by File Id");
-						System.out.println("2) Remove by File Name");
-						System.out.println("3) Back to Manage Files Menu");
-						System.out.println("Please Enter your appropriate choice(1-3)");
-						try {
-							ch = Integer.parseInt(scanner.nextLine());
-						}catch(NumberFormatException e) {
-							System.out.println(e.getMessage());
-						}
-						switch (ch) {
-						case 1:
-							System.out.println("Please enter File Id to delete");
-							int id = Integer.parseInt(scanner.nextLine());
-							try {
-								service.deleteAppFileById(id);
-								System.out.println("File Sucessfully Deleted");
-							} catch (AppFileException e1) {
-								System.out.println(e1.getMessage());
-							}
-							break;
-						case 2:
-							System.out.println("Please enter File Name to delete");
-							String filenameToDel = scanner.nextLine();
-							try {
-								service.deleteAppFileByName(filenameToDel);
-								System.out.println("File Sucessfully Deleted");
-							} catch (AppFileException e1) {
-								System.out.println(e1.getMessage());
-							}
-							break;
-						case 3:
-							break;
-						default:
-							System.out.println("Entered Invalid choice it should be between 1-3 only");
-							break;
-						}
-						
-					}while(ch!=3);
+					System.out.println("Please enter File Name to be deleted:");
+					String filenameToDel = scanner.nextLine();
+					try {
+						service.deleteAppFileByName(filenameToDel);
+						System.out.println("File Sucessfully Deleted");
+					} catch (AppFileException e1) {
+						System.out.println(e1.getMessage());
+					}
 					break;
 				case 3:
 					do {
@@ -185,6 +153,7 @@ public class LockedMeMain {
 							break;
 						}
 					}while(ch!=4);
+					ch=0;
 					break;
 				case 4:
 					break;
@@ -193,6 +162,7 @@ public class LockedMeMain {
 					break;
 				}
 				}while(ch!=4);
+				ch=0;
 				break;
 			case 3:
 				try {

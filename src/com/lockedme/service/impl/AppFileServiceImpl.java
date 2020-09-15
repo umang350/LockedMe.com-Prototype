@@ -21,14 +21,6 @@ public class AppFileServiceImpl implements AppFileService{
 		}
 		return dao.addAppFile(appfile);
 	}
-
-	private boolean isValidId(int id) {
-		boolean b=true;
-		if(id<0 && id>100000000) {
-			b=false;
-		}
-		return b;
-	}
 	
 	private boolean isValidName(String name) {
 		boolean b=false;
@@ -44,16 +36,6 @@ public class AppFileServiceImpl implements AppFileService{
 			b=true;
 		}
 		return b;
-	}
-	
-	@Override
-	public void deleteAppFileById(int fileId) throws AppFileException {
-		if(!isValidId(fileId)) {
-			throw new AppFileException("Invalid Id "+fileId);
-		}else {
-			dao.deleteAppFileById(fileId);
-		}
-		
 	}
 
 	@Override

@@ -30,15 +30,6 @@ public class AppFileDAOImpl implements AppFileDAO{
 	}
 
 	@Override
-	public void deleteAppFileById(int fileId) throws AppFileException {
-		if(appFileMap.containsKey(fileId)) {
-			appFileMap.remove(fileId);
-		}else {
-			throw new AppFileException("Entered id "+fileId+" doesnt exist");
-		}
-	}
-
-	@Override
 	public void deleteAppFileByName(String fileName) throws AppFileException {
 		List<AppFile> getAppFileByName = appFileMap.values().stream().filter(s->s.getFileName().equals(fileName)).collect(Collectors.toList());
 		

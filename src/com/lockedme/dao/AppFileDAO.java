@@ -7,7 +7,6 @@ import com.lockedme.model.AppFile;
 
 public interface AppFileDAO {
 	public AppFile addAppFile(AppFile appfile) throws AppFileException;
-	public void deleteAppFileById(int fileId) throws AppFileException;
 	public void deleteAppFileByName(String fileName) throws AppFileException;
 	public AppFile getAppFileByName(String fileName) throws AppFileException;
 	
